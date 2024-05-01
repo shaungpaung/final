@@ -3,7 +3,7 @@ CREATE TABLE branches (
     branchID INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255),
     address VARCHAR(255),
-    branchPhoneNumber VARCHAR(11)
+     VARCHAR(11)
 );
 
 -- Create the vehicles table
@@ -21,7 +21,7 @@ CREATE TABLE users (
     userID INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50),
     password VARCHAR(255),
-    role ENUM('admin', 'staff')
+    
 );
 
 -- Create the jobs table
