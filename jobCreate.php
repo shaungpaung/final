@@ -7,6 +7,7 @@ if (
     isset($_POST['hazardous']) &&
     isset($_POST['startDate']) &&
     isset($_POST['deadline']) &&
+    isset($_POST['jobVehicleID']) &&
     isset($_POST['originBranchID']) &&
     isset($_POST['destinationBranchID']) &&
     isset($_POST['status'])
@@ -19,12 +20,13 @@ if (
 
     $startDate = $_POST['startDate'];
     $deadline = $_POST['deadline'];
+    $jobVehicleID = $_POST['jobVehicleID'];
     $originBranchID = $_POST['originBranchID'];
     $destinationBranchID = $_POST['destinationBranchID'];
     $status = $_POST['status'];
 
-    $sql = "INSERT INTO jobs (quantity, weight, size, hazardous, startDate, deadline, originBranchID, destinationBranchID, status) 
-            VALUES ('$quantity', '$weight', '$size', '$hazardous', '$startDate', '$deadline', '$originBranchID', '$destinationBranchID', '$status')";
+    $sql = "INSERT INTO jobs (quantity, weight, size, hazardous, startDate, deadline, jobVehicleID, originBranchID, destinationBranchID, status) 
+            VALUES ('$quantity', '$weight', '$size', '$hazardous', '$startDate', '$deadline', '$jobVehicleID', '$originBranchID', '$destinationBranchID', '$status')";
     mysqli_query($conn, $sql);
 
     header("location:job.php");

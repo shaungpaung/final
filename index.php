@@ -18,7 +18,7 @@ include ('db.php');
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-..." crossorigin="anonymous"></script>
     <script src="toggle.js"></script>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="mainStyle.css" />
     <style>
         .hidden {
             display: none;
@@ -39,7 +39,7 @@ include ('db.php');
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                    Logistics Company
+                    <span class="text-white">Logistics Company</span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarNav">
@@ -67,7 +67,7 @@ include ('db.php');
         </nav>
     </header>
     <div class="main-container d-flex">
-        <div class="navContainer container-sm col-md-2 bg-primary">
+        <div class="navContainer container-sm col-md-2 bg-dark-subtle">
             <ul class="list-group mt-3 mb-3">
                 <a href="index.php">
                     <li class="list-group-item m-2 rounded custom-hover-bg custom-hover-text custom-hover-shadow">Users
@@ -93,10 +93,10 @@ include ('db.php');
             </ul>
         </div>
 
-        <div class="main bg-danger col-md-10 container-xxl">
+        <div class="main bg-body-secondary shadow p-3 mb-5 col-md-10 container-xxl">
             <div class="container-xl  align-items-center p2 border-body mt-2 mb-2">
                 <span class="d-flex justify-content-center">
-                    <div class="branch-form col-md-4 p-2 border rounded shadow-sm bg-white">
+                    <div class="branch-form shadow-lg col-md-4 p-2 border rounded bg-white">
                         <h5 id="toggle-form" class="text-center ">User Form</h5>
                         <?php
                         if (isset($_GET['userID'])) {
@@ -116,17 +116,17 @@ include ('db.php');
                         <?php } else { ?>
                             <form method="POST" id="job-form" action="userCreate.php">
                                 <input type="text" class="form-control mb-2" placeholder="Enter Name" name="username" />
-                                <input type="password" class="form-control mb-2" placeholder="Enter address"
+                                <input type="password" class="form-control mb-2" placeholder="Enter password"
                                     name="password" />
                                 <button class="btn btn-primary">Create</button>
                             </form>
                         <?php } ?>
                     </div>
                 </span>
-                <div class="table-container mt-1">
+                <div class="table-container border rounded shadow-lg mt-1">
                     <div class="main-page rounded">
                         <table class="table table-bordered ">
-                            <thead class="rounded sticky-top mb-1">
+                            <thead class="rounded sticky-top">
                                 <tr>
                                     <th class="text-center" scope="col">No</th>
                                     <th class="text-center" scope="col">Name</th>
@@ -148,9 +148,9 @@ include ('db.php');
                                         <td><?php echo $row['username']; ?></td>
                                         <td><?php echo $row['password']; ?></td>
                                         <td><a href="index.php?userID=<?php echo $row['userID']; ?>"
-                                                class="btn btn-primary">Edit</a></td>
+                                                class="btn edit edit-bg">Edit</a></td>
                                         <td><a href="userDelete.php?userID=<?php echo $row['userID']; ?>"
-                                                class="btn btn-danger">Delete</a></td>
+                                                class="btn delete delete-bg">Delete</a></td>
                                     </tr>
                                     <?php
                                 }
@@ -167,7 +167,7 @@ include ('db.php');
                     var form = $('#job-form');
                     if (form.hasClass('d-none')) {
                         form.removeClass('d-none');
-                        $('#toggle-form').text('Job Form');
+                        $('#toggle-form').text('User Form');
                     } else {
                         form.addClass('d-none');
                         $('#toggle-form').text('Open Form');

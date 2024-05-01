@@ -33,9 +33,11 @@ CREATE TABLE jobs (
     hazardous BOOLEAN,
     startDate DATE,
     deadline DATE,
+    jobVehicleID INT,
     originBranchID INT,
     destinationBranchID INT,
-    progess ENUM('completed', 'in progress'),
+    status ENUM('completed', 'in progress'),
+    FOREIGN KEY (jobVehicleID) REFERENCES vehicles(vehicleID),
     FOREIGN KEY (originBranchID) REFERENCES branches(branchID),
     FOREIGN KEY (destinationBranchID) REFERENCES branches(branchID)
 );
