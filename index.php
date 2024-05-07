@@ -97,6 +97,7 @@ include ('db.php');
             <div class="container-xl  align-items-center p2 border-body mt-2 mb-2">
                 <span class="d-flex justify-content-center">
                     <div class="branch-form shadow-lg col-md-4 p-2 border rounded bg-white">
+
                         <h5 id="toggle-form" class="text-center ">User Form</h5>
                         <?php
                         if (isset($_GET['userID'])) {
@@ -114,7 +115,7 @@ include ('db.php');
                                 <button class="btn btn-primary">Update</button>
                             </form>
                         <?php } else { ?>
-                            <form method="POST" id="job-form" action="userCreate.php">
+                            <form method="POST" id="user-form">
                                 <input type="text" class="form-control mb-2" placeholder="Enter Name" name="username" />
                                 <input type="password" class="form-control mb-2" placeholder="Enter password"
                                     name="password" />
@@ -175,7 +176,33 @@ include ('db.php');
                 });
             });
         </script>
-
+        <script>
+            $(document).ready(function () {
+                $('#user-form').submit(function (e) {
+                    e.preventDefault();
+                    var formData = $(this).serialize();
+                    $.ajax({
+                        type: 'POST',
+                        url: 'userCreate.php',
+                        data: formData + '&action=create',
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.status === 'success') {
+                                alert(response.message);
+                                setTimeout(function () {
+                                    window.location.reload();
+                                }, 1000);
+                            } else {
+                                alert(response.message);
+                            }
+                        },
+                        error: function () {
+                            alert('An error occurred while processing your request.');
+                        }
+                    });
+                });
+            });
+        </script>
 </body>
 
 </html>
