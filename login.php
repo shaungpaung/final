@@ -49,24 +49,36 @@
                 </form>
                 <?php
                 include 'db.php';
+                $error = ""; // Initialize error variable
+                
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $username = $_POST['username'];
                     $password = $_POST['password'];
-                    $stmt = $conn->prepare("SELECT * FROM users WHERE username=? AND password=?");
-                    $stmt->bind_param("ss", $username, $password);
+
+                    // Prepare a SQL statement using a parameterized query
+                    $stmt = $conn->prepare("SELECT * FROM users WHERE username=?");
+                    $stmt->bind_param("s", $username);
                     $stmt->execute();
                     $result = $stmt->get_result();
-                    if ($result->num_rows > 0) {
-                        header("Location: index.php");
-                        exit();
+
+                    // Check if a row was returned
+                    if ($result->num_rows == 1) {
+                        $row = $result->fetch_assoc();
+                        // Verify the password
+                        if (password_verify($password, $row['password'])) {
+                            // Password is correct, redirect to index.php
+                            header("Location: index.php");
+                            exit();
+                        } else {
+                            // Password is incorrect
+                            $error = "Invalid password";
+                        }
                     } else {
-                        $error = "Invalid username or password";
+                        // Username not found
+                        $error = "Invalid username";
                     }
                 }
                 ?>
-                <?php if (isset($error)) { ?>
-                    <div class="text-danger"><?php echo $error; ?></div>
-                <?php } ?>
             </div>
         </div>
     </div>
